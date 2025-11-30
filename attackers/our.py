@@ -8,7 +8,9 @@ def our_defense(args, emb, grad, labels, idx_list):
     if len(emb[0]) < num_classes:
         return grad
 
+    #  表示参与方面临聚类攻击的准确率, embindding
     cluster_acc_list = _kmeans(args.num_passive, num_classes, emb, labels)
+
     min_idx = np.argmin(cluster_acc_list)
 
     if cluster_acc_list[min_idx] == 0:
@@ -17,6 +19,9 @@ def our_defense(args, emb, grad, labels, idx_list):
     grad_new = []
     for idx in range(len(grad)):
         if (idx in idx_list) and ((cluster_acc_list[idx] - cluster_acc_list[min_idx] > 5) or (cluster_acc_list[idx] / cluster_acc_list[min_idx] > 2.0)):
+            # 0.05 是一个隐私保护强度调节因子，它在差分隐私机制中起着关键作用
+            # 其值越小 → 隐私保护越强 → 添加的噪声越大
+            # 其值越大 → 隐私保护越弱 → 添加的噪声越小
             epsilon = cluster_acc_list[min_idx] / cluster_acc_list[idx] * 0.05
             grad_new.append(_dp_defense(grad[idx], epsilon))
         else:
@@ -40,7 +45,8 @@ def _kmeans(num_passive, num_classes, emb, labels):
     acc_list = [0] * num_passive
     for passive_id in range(num_passive):
         # algorithm{'lloyd', 'elkan', 'auto', 'full'}, default='lloyd'
-        kmeans = KMeans(n_clusters=num_classes, random_state=0, n_init='auto')
+        # kmeans = KMeans(algorithm='elkan', random_state=0, n_init='auto')
+        kmeans = KMeans(n_clusters=num_classes, random_state=0, n_init=10)
         kmeans.fit(data[passive_id])
         kmeans_labels = kmeans.predict(data[passive_id])
 
