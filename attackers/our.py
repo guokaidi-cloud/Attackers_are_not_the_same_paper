@@ -8,7 +8,7 @@ def our_defense(args, emb, grad, labels, idx_list):
     if len(emb[0]) < num_classes:
         return grad
 
-    #  表示参与方面临聚类攻击的准确率, embindding
+    #  表示参与方面临聚类攻击的准确率(得分), embindding
     cluster_acc_list = _kmeans(args.num_passive, num_classes, emb, labels)
 
     min_idx = np.argmin(cluster_acc_list)

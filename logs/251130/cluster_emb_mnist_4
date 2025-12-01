@@ -166,7 +166,7 @@ Epoch:7/10, Step:200    Loss: 1.582241
 Attack Runtime: 143:473:306 (ns)
 Epoch:7/10, Step:300    Loss: 1.609259
 Attack Runtime: 141:940:251 (ns)
-Epoch:7/10, Step:400    Loss: 1.591497
+Epoch:7/10, Step:400    Loss: 1.````591497````
 Average Attack Accuracy of Passive 0 (each epoch): 16.95%
 Average Attack Accuracy of Passive 1 (each epoch): 59.53%
 Average Attack Accuracy of Passive 2 (each epoch): 48.31%

@@ -95,6 +95,12 @@ class Attacker(BaseVFL):
                 for batch_idx, batch_file in enumerate(os.listdir(self.data_dir)):
                     batch_data = torch.load(os.path.join(self.data_dir, batch_file))
                     emb, grad, labels = batch_data
+                    
+                    # 确保数据类型一致性，统一使用float32
+                    emb[passive_id] = emb[passive_id].float()
+                    grad[passive_id] = grad[passive_id].float()
+                    labels = labels.long()  # 标签使用long类型
+                    
                     emb[passive_id].requires_grad = True
                     
                     if epoch == 0:
@@ -102,6 +108,9 @@ class Attacker(BaseVFL):
                         label_guess = F.softmax(label_guess, dim=1)
                     else:
                         label_guess = torch.load(os.path.join(self.label_guess_dir, "label_guess_{}_{}.pt".format(passive_id, batch_idx)))
+                    
+                    # 确保label_guess是float类型
+                    label_guess = label_guess.float()
                     label_guess.requires_grad = True
                     label_optimizer = torch.optim.Adam([label_guess], lr=self.args.lr_attack_model)
 
@@ -112,6 +121,7 @@ class Attacker(BaseVFL):
                     weight_hat = torch.autograd.grad(loss_pred, emb[passive_id], create_graph=True)[0]
 
                     loss = self.loss_grad(weight_hat, grad[passive_id]) * 1e7
+                    loss = loss.float()  # 确保损失是float类型
 
                     self.reconstruction_optimizer[passive_id].zero_grad()
                     label_optimizer.zero_grad()
@@ -132,8 +142,14 @@ class Attacker(BaseVFL):
                 for batch_idx, batch_file in enumerate(os.listdir(self.data_dir)):
                     batch_data = torch.load(os.path.join(self.data_dir, batch_file))
                     emb, _, labels = batch_data
+                    
+                    # 确保数据类型一致性
+                    emb[passive_id] = emb[passive_id].float()
+                    labels = labels.long()
+                    
                     # correct += self.reconstruction_model[passive_id](emb[passive_id]).argmax(dim=1).eq(labels).sum().item()
                     label_guess = torch.load(os.path.join(self.label_guess_dir, "label_guess_{}_{}.pt".format(passive_id, batch_idx)))
+                    label_guess = label_guess.float()  # 确保类型一致性
                     correct += label_guess.argmax(dim=1).eq(labels).sum().item()
             acc = 100. * correct / self.train_dataset_len
             tot_acc.append(acc)
@@ -159,15 +175,22 @@ class Attacker(BaseVFL):
                 for batch_idx, batch_file in enumerate(os.listdir(self.data_dir)):
                     batch_data = torch.load(os.path.join(self.data_dir, batch_file))
                     batch_emb, batch_grad, batch_labels = batch_data
-                    batch_emb = batch_emb[passive_id]
+                    
+                    # 确保数据类型一致性，统一使用float32
+                    batch_emb = batch_emb[passive_id].float()
+                    batch_grad = batch_grad[passive_id].float()
+                    batch_labels = batch_labels.long()  # 标签使用long类型
+                    
                     batch_emb.requires_grad = True
-                    batch_grad = batch_grad[passive_id]
 
                     if epoch == 0:
                         label_guess = torch.zeros((batch_labels.shape[0], num_classes), dtype=torch.float)
                         label_guess = F.softmax(label_guess, dim=1)
                     else:
                         label_guess = torch.load(os.path.join(self.label_guess_dir, "label_guess_{}_{}.pt".format(passive_id, batch_idx)))
+                    
+                    # 确保label_guess是float类型
+                    label_guess = label_guess.float()
                     label_guess.requires_grad = True
                     label_optimizer = torch.optim.Adam([label_guess], lr=self.args.lr_attack_model)
 
@@ -177,6 +200,7 @@ class Attacker(BaseVFL):
                     ce_loss = self.loss_pred(pred, label_guess)
                     weight_hat = torch.autograd.grad(ce_loss, batch_emb, create_graph=True)[0]
                     grad_loss = self.loss_grad(weight_hat, batch_grad) * 1e7
+                    grad_loss = grad_loss.float()  # 确保损失是float类型
                     # ce_loss = losses.SoftCrossEntropyLoss(reduction='mean')(pred, label_guess)
                     # grad_approx = torch.autograd.grad(ce_loss, batch_emb, create_graph=True)[0]
                     # grad_norm_mean = batch_grad.norm(dim=-1).mean().item()
@@ -187,6 +211,7 @@ class Attacker(BaseVFL):
                     kl_loss = losses.KlDivLoss(reduction='mean')(label_prior, label_guess.mean(dim=0, keepdim=True))
 
                     loss = grad_loss + acc_loss + kl_loss
+                    loss = loss.float()  # 确保最终损失是float类型
 
 
                     # loss_pred = self.loss_pred(pred, label_guess)
@@ -218,8 +243,14 @@ class Attacker(BaseVFL):
                 for batch_idx, batch_file in enumerate(os.listdir(self.data_dir)):
                     batch_data = torch.load(os.path.join(self.data_dir, batch_file))
                     emb, _, labels = batch_data
+                    
+                    # 确保数据类型一致性
+                    emb[passive_id] = emb[passive_id].float()
+                    labels = labels.long()
+                    
                     # correct += self.reconstruction_model[passive_id](emb[passive_id]).argmax(dim=1).eq(labels).sum().item()
                     label_guess = torch.load(os.path.join(self.label_guess_dir, "label_guess_{}_{}.pt".format(passive_id, batch_idx)))
+                    label_guess = label_guess.float()  # 确保类型一致性
                     correct += label_guess.argmax(dim=1).eq(labels).sum().item()
             acc = 100. * correct / self.train_dataset_len
             tot_acc.append(acc)
