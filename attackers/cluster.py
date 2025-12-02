@@ -90,8 +90,7 @@ class Attacker(BaseVFL):
         acc_list = [0] * self.args.num_passive
         for passive_id in range(self.args.num_passive):
             # algorithm{'lloyd', 'elkan', 'auto', 'full'}, default='lloyd'
-            #kmeans = KMeans(n_clusters=num_classes, random_state=0, n_init='auto')
-            kmeans = KMeans(n_clusters=num_classes, random_state=0, n_init=10)
+            kmeans = KMeans(n_clusters=num_classes, random_state=0, n_init='auto')
             kmeans.fit(data[passive_id])
             kmeans_labels = kmeans.predict(data[passive_id])
 

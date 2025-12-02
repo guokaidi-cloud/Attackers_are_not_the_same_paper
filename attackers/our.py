@@ -46,7 +46,7 @@ def _kmeans(num_passive, num_classes, emb, labels):
     for passive_id in range(num_passive):
         # algorithm{'lloyd', 'elkan', 'auto', 'full'}, default='lloyd'
         # kmeans = KMeans(algorithm='elkan', random_state=0, n_init='auto')
-        kmeans = KMeans(n_clusters=num_classes, random_state=0, n_init=10)
+        kmeans = KMeans(n_clusters=num_classes, random_state=0, n_init='auto')
         kmeans.fit(data[passive_id])
         kmeans_labels = kmeans.predict(data[passive_id])
 
