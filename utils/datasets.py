@@ -118,18 +118,10 @@ datasets_name = {
     "criteo": "Criteo"
 }
 
-class FastCIFAR10(datasets.CIFAR10):
-    """使用国内镜像的CIFAR10"""
-    mirrors = [
-        'https://mirrors.aliyun.com/pytorch/cifar-10-python.tar.gz',
-        'https://mirrors.huaweicloud.com/pytorch/cifar-10-python.tar.gz',
-        'https://mirrors.tuna.tsinghua.edu.cn/pytorch/cifar-10-python.tar.gz',
-    ]
-    
 datasets_dict = {
     "mnist": datasets.MNIST,
     "fashionmnist": datasets.FashionMNIST,
-    "cifar10": FastCIFAR10,
+    "cifar10": datasets.CIFAR10,
     "cifar100": datasets.CIFAR100,
     "criteo": Criteo
 }
