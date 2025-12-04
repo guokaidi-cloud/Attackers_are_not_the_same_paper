@@ -1,0 +1,206 @@
+(base) nvidia@DRL-DZ000955:~/workspace/Attackers_are_not_the_same_paper$ python main.py --attack completion  --dataset mnist  --num_passive 2 --lr_passive  0.01 --lr_active 0.01
+Arguments:
+                   as_order : False
+                     attack : completion
+               attack_epoch : 1
+        attack_every_n_iter : 100
+                  attack_id : 0
+        attack_model_epochs : 5
+                   balanced : False
+                 batch_size : 128
+                    dataset : mnist
+                    defense : False
+                defense_all : False
+                 dispersion : False
+              division_mode : vertical
+                     epochs : 10
+                    epsilon : 0.01
+                  lr_active : 0.01
+                  lr_attack : 0.01
+            lr_attack_model : 0.1
+                 lr_passive : 0.01
+                num_passive : 2
+                        our : False
+               padding_mode : False
+                      round : 0
+           set_attack_epoch : False
+                     simple : False
+                       tsne : False
+                    use_emb : False
+Passive Model Sequential(
+  (0): Flatten_input()
+  (1): Linear(in_features=392, out_features=392, bias=True)
+  (2): BatchNorm1d(392, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (3): ReLU()
+)
+Passive Model Sequential(
+  (0): Flatten_input()
+  (1): Linear(in_features=392, out_features=392, bias=True)
+  (2): BatchNorm1d(392, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (3): ReLU()
+)
+Active Model Sequential(
+  (0): Dropout(p=0.5, inplace=False)
+  (1): Linear(in_features=784, out_features=10, bias=True)
+)
+Finish processing dataset.
+Attacker: completion
+Attack Runtime: 0:0:941 (ns)
+Epoch:1/10, Step:100    Loss: 2.050559
+Attack Runtime: 0:0:591 (ns)
+Epoch:1/10, Step:200    Loss: 1.880967
+Attack Runtime: 0:1:42 (ns)
+Epoch:1/10, Step:300    Loss: 1.815918
+Attack Runtime: 0:0:731 (ns)
+Epoch:1/10, Step:400    Loss: 1.776526
+Attack Runtime: 0:0:571 (ns)
+Epoch:1/10, Step:469    Loss: 1.757107
+Completion Model Sequential(
+  (0): Flatten()
+  (1): Linear(in_features=392, out_features=128, bias=True)
+  (2): Linear(in_features=128, out_features=10, bias=True)
+)
+Completion Model Sequential(
+  (0): Flatten()
+  (1): Linear(in_features=392, out_features=128, bias=True)
+  (2): Linear(in_features=128, out_features=10, bias=True)
+)
+Average Attack Accuracy of Passive 0 (each epoch): 22.31%
+Average Attack Accuracy of Passive 1 (each epoch): 29.83%
+Attack Runtime: 1087:14:740 (ns)
+Train set: Average loss: 1.7218, Accuracy: 48019/60000 (80.03%)
+
+Attack Runtime: 0:1:142 (ns)
+Epoch:2/10, Step:100    Loss: 1.750017
+Attack Runtime: 0:0:851 (ns)
+Epoch:2/10, Step:200    Loss: 1.689520
+Attack Runtime: 0:0:962 (ns)
+Epoch:2/10, Step:300    Loss: 1.696365
+Attack Runtime: 0:0:792 (ns)
+Epoch:2/10, Step:400    Loss: 1.708159
+Attack Runtime: 0:0:662 (ns)
+Epoch:2/10, Step:469    Loss: 1.684427
+Average Attack Accuracy of Passive 0 (each epoch): 60.24%
+Average Attack Accuracy of Passive 1 (each epoch): 46.00%
+Attack Runtime: 1078:0:39 (ns)
+Train set: Average loss: 1.6614, Accuracy: 50013/60000 (83.36%)
+
+Attack Runtime: 0:0:831 (ns)
+Epoch:3/10, Step:100    Loss: 1.672945
+Attack Runtime: 0:0:782 (ns)
+Epoch:3/10, Step:200    Loss: 1.613401
+Attack Runtime: 0:0:782 (ns)
+Epoch:3/10, Step:300    Loss: 1.653761
+Attack Runtime: 0:0:872 (ns)
+Epoch:3/10, Step:400    Loss: 1.623848
+Attack Runtime: 0:0:682 (ns)
+Epoch:3/10, Step:469    Loss: 1.620647
+Average Attack Accuracy of Passive 0 (each epoch): 64.40%
+Average Attack Accuracy of Passive 1 (each epoch): 55.55%
+Attack Runtime: 1080:912:165 (ns)
+Train set: Average loss: 1.6018, Accuracy: 53960/60000 (89.93%)
+
+Attack Runtime: 0:0:631 (ns)
+Epoch:4/10, Step:100    Loss: 1.631663
+Attack Runtime: 0:0:691 (ns)
+Epoch:4/10, Step:200    Loss: 1.587018
+Attack Runtime: 0:0:651 (ns)
+Epoch:4/10, Step:300    Loss: 1.618177
+Attack Runtime: 0:0:712 (ns)
+Epoch:4/10, Step:400    Loss: 1.599237
+Attack Runtime: 0:0:742 (ns)
+Epoch:4/10, Step:469    Loss: 1.580150
+Average Attack Accuracy of Passive 0 (each epoch): 62.97%
+Average Attack Accuracy of Passive 1 (each epoch): 59.09%
+Attack Runtime: 1080:750:36 (ns)
+Train set: Average loss: 1.5814, Accuracy: 54680/60000 (91.13%)
+
+Attack Runtime: 0:0:761 (ns)
+Epoch:5/10, Step:100    Loss: 1.592435
+Attack Runtime: 0:0:832 (ns)
+Epoch:5/10, Step:200    Loss: 1.576556
+Attack Runtime: 0:0:841 (ns)
+Epoch:5/10, Step:300    Loss: 1.597031
+Attack Runtime: 0:0:781 (ns)
+Epoch:5/10, Step:400    Loss: 1.572011
+Attack Runtime: 0:1:72 (ns)
+Epoch:5/10, Step:469    Loss: 1.566643
+Average Attack Accuracy of Passive 0 (each epoch): 62.40%
+Average Attack Accuracy of Passive 1 (each epoch): 62.60%
+Attack Runtime: 1077:961:89 (ns)
+Train set: Average loss: 1.5694, Accuracy: 55053/60000 (91.75%)
+
+Attack Runtime: 0:0:631 (ns)
+Epoch:6/10, Step:100    Loss: 1.590689
+Attack Runtime: 0:0:871 (ns)
+Epoch:6/10, Step:200    Loss: 1.573687
+Attack Runtime: 0:0:701 (ns)
+Epoch:6/10, Step:300    Loss: 1.607298
+Attack Runtime: 0:0:812 (ns)
+Epoch:6/10, Step:400    Loss: 1.573506
+Attack Runtime: 0:0:711 (ns)
+Epoch:6/10, Step:469    Loss: 1.554584
+Average Attack Accuracy of Passive 0 (each epoch): 69.53%
+Average Attack Accuracy of Passive 1 (each epoch): 63.68%
+Attack Runtime: 1076:846:657 (ns)
+Train set: Average loss: 1.5609, Accuracy: 55379/60000 (92.30%)
+
+Attack Runtime: 0:0:741 (ns)
+Epoch:7/10, Step:100    Loss: 1.606460
+Attack Runtime: 0:0:682 (ns)
+Epoch:7/10, Step:200    Loss: 1.555383
+Attack Runtime: 0:0:782 (ns)
+Epoch:7/10, Step:300    Loss: 1.595196
+Attack Runtime: 0:0:742 (ns)
+Epoch:7/10, Step:400    Loss: 1.568608
+Attack Runtime: 0:0:792 (ns)
+Epoch:7/10, Step:469    Loss: 1.552398
+Average Attack Accuracy of Passive 0 (each epoch): 68.58%
+Average Attack Accuracy of Passive 1 (each epoch): 64.06%
+Attack Runtime: 1081:382:583 (ns)
+Train set: Average loss: 1.5545, Accuracy: 55582/60000 (92.64%)
+
+Attack Runtime: 0:0:792 (ns)
+Epoch:8/10, Step:100    Loss: 1.578340
+Attack Runtime: 0:0:911 (ns)
+Epoch:8/10, Step:200    Loss: 1.541625
+Attack Runtime: 0:0:971 (ns)
+Epoch:8/10, Step:300    Loss: 1.583419
+Attack Runtime: 0:0:692 (ns)
+Epoch:8/10, Step:400    Loss: 1.557640
+Attack Runtime: 0:0:711 (ns)
+Epoch:8/10, Step:469    Loss: 1.537929
+Average Attack Accuracy of Passive 0 (each epoch): 71.32%
+Average Attack Accuracy of Passive 1 (each epoch): 68.31%
+Attack Runtime: 1078:347:535 (ns)
+Train set: Average loss: 1.5493, Accuracy: 55804/60000 (93.01%)
+
+Attack Runtime: 0:0:691 (ns)
+Epoch:9/10, Step:100    Loss: 1.565530
+Attack Runtime: 0:0:882 (ns)
+Epoch:9/10, Step:200    Loss: 1.552963
+Attack Runtime: 0:0:761 (ns)
+Epoch:9/10, Step:300    Loss: 1.566211
+Attack Runtime: 0:0:812 (ns)
+Epoch:9/10, Step:400    Loss: 1.560779
+Attack Runtime: 0:0:721 (ns)
+Epoch:9/10, Step:469    Loss: 1.539330
+Average Attack Accuracy of Passive 0 (each epoch): 69.70%
+Average Attack Accuracy of Passive 1 (each epoch): 72.27%
+Attack Runtime: 1077:870:296 (ns)
+Train set: Average loss: 1.5450, Accuracy: 55975/60000 (93.29%)
+
+Attack Runtime: 0:0:752 (ns)
+Epoch:10/10, Step:100   Loss: 1.586363
+Attack Runtime: 0:0:761 (ns)
+Epoch:10/10, Step:200   Loss: 1.543630
+Attack Runtime: 0:1:122 (ns)
+Epoch:10/10, Step:300   Loss: 1.564917
+Attack Runtime: 0:0:661 (ns)
+Epoch:10/10, Step:400   Loss: 1.557206
+Attack Runtime: 0:0:701 (ns)
+Epoch:10/10, Step:469   Loss: 1.536755
+Average Attack Accuracy of Passive 0 (each epoch): 69.87%
+Average Attack Accuracy of Passive 1 (each epoch): 72.21%
+Attack Runtime: 1083:864:943 (ns)
+Train set: Average loss: 1.5412, Accuracy: 56161/60000 (93.60%)
