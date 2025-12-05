@@ -527,5 +527,6 @@ class BaseVFL(object):
         flatten_grad = grad.flatten()
         grad_norm = abs(flatten_grad.norm(dim=0, p=2))
         clip_grad = flatten_grad.clip(-grad_norm, grad_norm).reshape(grad.shape)
+        print(f"self.args.epsilon = {self.args.epsilon}")
         noise_grad = clip_grad + torch.tensor(np.random.laplace(loc=0, scale=grad_norm.detach().numpy() * 1.0 / self.args.epsilon, size=clip_grad.shape))
         return noise_grad
